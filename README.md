@@ -2,9 +2,9 @@
 
 This package contains an [ESLint](https://eslint.org/) [shareable
 config](https://eslint.org/docs/developer-guide/shareable-configs) that is used
-by Etherpad and Etherpad plugins in the https://github.com/ether namespace. You
-are encouraged to use it for your own Etherpad plugins so that your code stays
-consistent with the Etherpad codebase.
+by [Etherpad](https://etherpad.org/) and Etherpad plugins in the
+https://github.com/ether namespace. You are encouraged to use it for your own
+Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 
 ## Usage in an Etherpad Plugin
 

@@ -8,9 +8,11 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 
 ## Available Configs
 
-* **`etherpad`**: Base config intended for use with Node.js code.
-* **`etherpad/plugin`**: Extends `etherpad`. Adds browser-specific settings and
-  disables Node.js-specific settings for `*.js` files used in browsers.
+* **`etherpad`**: Base config containing settings that are common to all files.
+* **`etherpad/node`**: Extends `etherpad` for code that runs in Node.js.
+* **`etherpad/browser`**: Extends `etherpad` for code that runs in the browser.
+* **`etherpad/plugin`**: Applies `etherpad/node` to code that runs in Node.js
+  and `etherpad/browser` to code that runs in the browser.
 
 ## Usage in an Etherpad Plugin
 
@@ -55,9 +57,9 @@ in your `package.json`. For example:
       {
         "files": ["static/js/shared/**/*"],
         "env": {
-          "node": true,
           "shared-node-browser": true
         }
+        "extends": "etherpad/node",
       }
     ]
   }

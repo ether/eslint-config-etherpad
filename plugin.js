@@ -1,15 +1,20 @@
 'use strict';
 
 module.exports = {
-  extends: 'etherpad',
   overrides: [
+    {
+      files: ['**/.eslintrc.js'],
+      extends: 'etherpad/node',
+    },
+    {
+      files: ['**/*'],
+      excludedFiles: ['**/.eslintrc.js', 'static/js/**/*', 'static/tests/frontend/**/*'],
+      extends: 'etherpad/node',
+    },
     {
       files: ['static/js/**/*', 'static/tests/frontend/**/*'],
       excludedFiles: ['**/.eslintrc.js'],
-      env: {
-        browser: true,
-        node: false,
-      },
+      extends: 'etherpad/browser',
     },
   ],
 };

@@ -16,5 +16,20 @@ module.exports = {
       excludedFiles: ['**/.eslintrc.js'],
       extends: 'etherpad/browser',
     },
+    {
+      files: ['static/tests/**/*'],
+      excludedFiles: ['**/.eslintrc.js'],
+      extends: 'etherpad/tests',
+    },
+    {
+      files: ['static/tests/backend/**/*'],
+      excludedFiles: ['**/.eslintrc.js'],
+      extends: 'etherpad/tests/backend',
+    },
+    {
+      files: ['static/tests/frontend/**/*'],
+      excludedFiles: ['**/.eslintrc.js'],
+      extends: 'etherpad/tests/frontend',
+    },
   ],
 };

@@ -11,8 +11,13 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 * **`etherpad`**: Base config containing settings that are common to all files.
 * **`etherpad/node`**: Extends `etherpad` for code that runs in Node.js.
 * **`etherpad/browser`**: Extends `etherpad` for code that runs in the browser.
-* **`etherpad/plugin`**: Applies `etherpad/node` to code that runs in Node.js
-  and `etherpad/browser` to code that runs in the browser.
+* **`etherpad/tests`**: Mixin that adds test-specific settings.
+* **`etherpad/tests/backend`**: Extends `etherpad/tests` for backend test code.
+* **`etherpad/tests/frontend`**: Extends `etherpad/tests` for frontend test
+  code.
+* **`etherpad/plugin`**: Applies `etherpad/node` to code that runs in Node.js,
+  `etherpad/browser` to code that runs in the browser, and `etherpad/tests` to
+  test code.
 
 ## Usage in an Etherpad Plugin
 
@@ -22,7 +27,7 @@ layout](https://etherpad.org/doc/latest/#index_folder_structure).
 1.  Install the shareable config and its dependencies:
 
     ```shell
-    npm install --save-dev eslint eslint-config-etherpad
+    npm install --save-dev eslint eslint-config-etherpad eslint-plugin-mocha
     ```
 
 2.  Edit your `package.json` to use the shareable config:

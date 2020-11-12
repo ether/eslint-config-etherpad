@@ -25,7 +25,8 @@
     "lint": "eslint ."
   },
   "peerDependencies": {
-    "eslint": "^7.13.0"
+    "eslint": "^7.13.0",
+    "eslint-plugin-mocha": "^8.0.0"
   },
   "devDependencies": {
     "eslint": "^7.13.0"

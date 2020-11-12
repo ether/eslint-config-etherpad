@@ -42,7 +42,6 @@ module.exports = {
     'no-extend-native': 'error',
     'no-implicit-globals': 'error',
     'no-implied-eval': 'error',
-    'no-invalid-this': 'error',
     'no-lonely-if': 'error',
     'no-multi-spaces': 'error',
     'no-multi-str': 'error',

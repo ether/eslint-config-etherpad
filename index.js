@@ -6,6 +6,10 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'plugin:promise/recommended',
+  ],
+  plugins: [
+    'promise',
   ],
   rules: {
     'array-bracket-newline': ['error', 'consistent'],

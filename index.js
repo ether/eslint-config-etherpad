@@ -9,6 +9,7 @@ module.exports = {
     'plugin:promise/recommended',
   ],
   plugins: [
+    'prefer-arrow',
     'promise',
   ],
   rules: {
@@ -68,6 +69,7 @@ module.exports = {
     'operator-linebreak': 'error',
     'padded-blocks': ['error', 'never'],
     'prefer-arrow-callback': 'error',
+    'prefer-arrow/prefer-arrow-functions': 'error',
     'prefer-const': 'error',
     'prefer-promise-reject-errors': 'error',
     'prefer-rest-params': 'error',

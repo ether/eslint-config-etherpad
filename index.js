@@ -76,7 +76,7 @@ module.exports = {
     'prefer-spread': 'error',
     'prefer-template': 'error',
     'quote-props': ['error', 'consistent-as-needed'],
-    'quotes': ['error', 'single'],
+    'quotes': ['error', 'single', {avoidEscape: true}],
     'rest-spread-spacing': 'error',
     'semi': 'error',
     'semi-spacing': 'error',

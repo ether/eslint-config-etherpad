@@ -65,6 +65,7 @@ module.exports = {
     'nonblock-statement-body-position': 'error',
     'object-curly-newline': 'error',
     'object-curly-spacing': 'error',
+    'object-shorthand': 'error',
     'one-var': ['error', 'never'],
     'operator-assignment': 'error',
     'operator-linebreak': 'error',

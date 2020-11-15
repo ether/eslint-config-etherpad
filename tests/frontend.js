@@ -1,7 +1,10 @@
 'use strict';
 
 module.exports = {
-  extends: 'etherpad/tests',
+  extends: [
+    'etherpad/browser',
+    'etherpad/tests',
+  ],
   globals: {
     expect: 'readonly',
     helper: 'readonly',

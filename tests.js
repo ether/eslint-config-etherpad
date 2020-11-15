@@ -5,6 +5,7 @@ module.exports = {
     mocha: true,
   },
   extends: [
+    'etherpad',
     'plugin:mocha/recommended',
   ],
   plugins: [

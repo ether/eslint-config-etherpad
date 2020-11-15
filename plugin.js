@@ -12,7 +12,7 @@ module.exports = {
       extends: 'etherpad/node',
     },
     {
-      files: ['static/js/**/*', 'static/tests/frontend/**/*'],
+      files: ['static/js/**/*'],
       excludedFiles: ['**/.eslintrc.js'],
       extends: 'etherpad/browser',
     },

@@ -11,18 +11,16 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 * **`etherpad`**: Base config containing settings that are common to all files.
 * **`etherpad/node`**: Extends `etherpad` for code that runs in Node.js.
 * **`etherpad/browser`**: Extends `etherpad` for code that runs in the browser.
-* **`etherpad/tests`**: Mixin that adds test-specific settings.
-* **`etherpad/tests/backend`**: Extends `etherpad/tests` for backend test code.
-* **`etherpad/tests/frontend`**: Extends `etherpad/tests` for frontend test
-  code.
-* **`etherpad/plugin`**: Applies `etherpad/node` to code that runs in Node.js,
-  `etherpad/browser` to code that runs in the browser, and `etherpad/tests` to
-  test code.
+* **`etherpad/tests`**: Extends `etherpad` for test code.
+* **`etherpad/tests/backend`**: Extends `etherpad/node` and `etherpad/tests` for
+  backend test code.
+* **`etherpad/tests/frontend`**: Extends `etherpad/browser` and `etherpad/tests`
+  for frontend test code.
+* **`etherpad/plugin`**: Applies the above configs to the appropriate files.
+  Assumes the plugin follows the [typical file
+  layout](https://etherpad.org/doc/latest/#index_folder_structure).
 
 ## Usage in an Etherpad Plugin
-
-The files in the plugin are expected to follow the [typical
-layout](https://etherpad.org/doc/latest/#index_folder_structure).
 
 1.  Install the shareable config and its dependencies:
 

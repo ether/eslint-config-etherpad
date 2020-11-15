@@ -1,5 +1,8 @@
 'use strict';
 
 module.exports = {
-  extends: 'etherpad/tests',
+  extends: [
+    'etherpad/node',
+    'etherpad/tests',
+  ],
 };

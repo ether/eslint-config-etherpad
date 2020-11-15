@@ -77,6 +77,9 @@ module.exports = {
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',
     'prefer-template': 'error',
+    // This rule is largely unnecessary thanks to the `await` keyword (`.then()` should be rare).
+    // Also, being forced to add a return statement for a valueless Promise is annoying.
+    'promise/always-return': 'off',
     // This rule is largely unnecessary because most browsers now log unhandled Promise rejections.
     'promise/catch-or-return': 'off',
     'quote-props': ['error', 'consistent-as-needed'],

@@ -16,5 +16,6 @@ module.exports = {
     'mocha/no-synchronous-tests': 'error',
     'mocha/prefer-arrow-callback': 'error',
     'prefer-arrow-callback': 'off',
+    'prefer-arrow/prefer-arrow-functions': 'off',
   },
 };

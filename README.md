@@ -27,7 +27,13 @@ layout](https://etherpad.org/doc/latest/#index_folder_structure).
 1.  Install the shareable config and its dependencies:
 
     ```shell
-    npm install --save-dev eslint eslint-config-etherpad eslint-plugin-mocha
+    npm install --save-dev \
+        eslint \
+        eslint-plugin-mocha \
+        eslint-plugin-node \
+        eslint-plugin-prefer-arrow \
+        eslint-plugin-promise \
+        eslint-config-etherpad
     ```
 
 2.  Edit your `package.json` to use the shareable config:

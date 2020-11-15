@@ -77,6 +77,8 @@ module.exports = {
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',
     'prefer-template': 'error',
+    // This rule is largely unnecessary because most browsers now log unhandled Promise rejections.
+    'promise/catch-or-return': 'off',
     'quote-props': ['error', 'consistent-as-needed'],
     'quotes': ['error', 'single', {avoidEscape: true}],
     'rest-spread-spacing': 'error',

@@ -37,28 +37,31 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 2.  Edit your `package.json` to use the shareable config:
 
     ```json
-    {
       "eslintConfig": {
         "root": true,
         "extends": "etherpad/plugin"
       },
+    ```
+
+3. *Optional but recommended:* Define a `lint` script so that you can run `npm
+   run lint` to check the code:
+
+    ```json
       "scripts": {
         "lint": "eslint ."
       },
-      "engines": {
-        "node": ">=10.13.0"
-      }
-    }
     ```
 
-    The `scripts` definition is optional but recommended. With it you can run
-    `npm run lint` to check the code.
+4. *Optional but recommended:* Specify the minimum version of Node.js you
+    support (ideally this would match [Etherpad's minimum required
+    version](https://github.com/ether/etherpad-lite#requirements)) so that the
+    `node` ESLint plugin can warn you when you use incompatible features:
 
-    The `engines` definition is also optional but recommended. With it the
-    `node` ESLint plugin can warn you when you use features that are not
-    compatible with all of the versions of Node.js you wish to support. Ideally
-    the version would match [Etherpad's minimum required
-    version](https://github.com/ether/etherpad-lite#requirements).
+    ```json
+      "engines": {
+        "node": ">=10.13.0"
+      },
+    ```
 
 ## Overrides
 

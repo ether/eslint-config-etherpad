@@ -9,7 +9,6 @@ module.exports = {
     jquery: true,
   },
   globals: {
-    _: 'readonly',
     clientVars: 'readonly',
     exports: 'readonly',
     html10n: 'readonly',

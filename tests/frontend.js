@@ -6,6 +6,7 @@ module.exports = {
     'etherpad/tests',
   ],
   globals: {
+    _: 'readonly',
     expect: 'readonly',
     helper: 'readonly',
   },

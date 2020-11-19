@@ -33,7 +33,18 @@ module.exports = {
     'func-call-spacing': 'error',
     'guard-for-in': 'error',
     'implicit-arrow-linebreak': 'error',
-    'indent': ['error', 2],
+    'indent': ['error', 2, {
+      CallExpression: {
+        arguments: 2,
+      },
+      FunctionDeclaration: {
+        parameters: 2,
+      },
+      FunctionExpression: {
+        parameters: 2,
+      },
+      MemberExpression: 2,
+    }],
     'key-spacing': 'error',
     'keyword-spacing': 'error',
     'linebreak-style': 'error',

@@ -70,6 +70,7 @@ module.exports = {
     'object-curly-spacing': 'error',
     'object-shorthand': 'error',
     'one-var': ['error', {initialized: 'never'}],
+    'one-var-declaration-per-line': ['error', 'initializations'],
     'operator-assignment': 'error',
     'operator-linebreak': 'error',
     'padded-blocks': ['error', 'never'],

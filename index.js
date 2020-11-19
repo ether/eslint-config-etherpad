@@ -44,6 +44,7 @@ module.exports = {
         parameters: 2,
       },
       MemberExpression: 2,
+      SwitchCase: 1,
     }],
     'key-spacing': 'error',
     'keyword-spacing': 'error',

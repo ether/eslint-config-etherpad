@@ -69,7 +69,7 @@ module.exports = {
     'object-curly-newline': 'error',
     'object-curly-spacing': 'error',
     'object-shorthand': 'error',
-    'one-var': ['error', 'never'],
+    'one-var': ['error', {initialized: 'never'}],
     'operator-assignment': 'error',
     'operator-linebreak': 'error',
     'padded-blocks': ['error', 'never'],

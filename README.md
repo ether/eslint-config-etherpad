@@ -73,6 +73,19 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
       },
     ```
 
+6. Apply automatic fixes. If you added the optional `lint` script to
+   `package.json`, you can run:
+
+   ```shell
+   npm run lint -- --fix
+   ```
+
+   Or you can run:
+
+   ```shell
+   npx eslint --fix .
+   ```
+
 ## Overrides
 
 If you need to tune the configs, you can specify

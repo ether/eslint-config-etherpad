@@ -93,7 +93,6 @@ If you need to tune the configs, you can specify
 in your `package.json`. For example:
 
 ```json
-{
   "eslintConfig": {
     "root": true,
     "extends": "etherpad/plugin",
@@ -102,12 +101,11 @@ in your `package.json`. For example:
         "files": ["static/js/shared/**/*"],
         "env": {
           "shared-node-browser": true
-        }
-        "extends": "etherpad/node",
+        },
+        "extends": "etherpad/node"
       }
     ]
-  }
-}
+  },
 ```
 
 ## Copyright and License

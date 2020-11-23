@@ -8,6 +8,9 @@ module.exports = {
   env: {
     node: true,
   },
+  ignorePatterns: [
+    'node_modules/',
+  ],
   plugins: [
     'node',
   ],

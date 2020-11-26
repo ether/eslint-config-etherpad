@@ -73,6 +73,7 @@ module.exports = {
     'no-multiple-empty-lines': ['error', {max: 2, maxBOF: 0, maxEOF: 0}],
     'no-new-object': 'error',
     'no-new-wrappers': 'error',
+    'no-nonoctal-decimal-escape': 'error',
     'no-prototype-builtins': 'error',
     'no-script-url': 'error',
     'no-tabs': 'error',

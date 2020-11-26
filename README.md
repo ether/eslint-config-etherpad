@@ -53,6 +53,19 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
       },
    ```
 
+   Adding an entry to `peerDependencies` does not cause `npm install` to install
+   that peer dependency; you must manually install it yourself:
+
+   ```shell
+   npm install --no-save ep_etherpad-lite@file:/path/to/etherpad-lite/src
+   ```
+
+   The above command creates a symlink at `node_modules/ep_etherpad-lite` that
+   points to `/path/to/etherpad-lite/src`. Unfortunately, `npm` automatically
+   deletes that symlink whenever you run `npm install` to install, add, or
+   update a regular dependency, so remember to re-run the above command each
+   time you run `npm install`.
+
 4. *Optional but recommended:* Define a `lint` script so that you can run `npm
    run lint` to check the code:
 

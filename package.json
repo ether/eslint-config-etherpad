@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-etherpad",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "ESLint shareable config used for Etherpad and its plugins",
   "main": "index.js",
   "repository": {

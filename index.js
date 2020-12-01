@@ -35,6 +35,7 @@ module.exports = {
     'comma-style': 'error',
     'computed-property-spacing': 'error',
     'curly': ['error', 'multi-line', 'consistent'],
+    'dot-location': ['error', 'property'],
     'dot-notation': 'error',
     'eol-last': 'error',
     'eqeqeq': ['error', 'always', {null: 'never'}],

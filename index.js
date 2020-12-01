@@ -119,6 +119,7 @@ module.exports = {
     'rest-spread-spacing': 'error',
     'semi': 'error',
     'semi-spacing': 'error',
+    'semi-style': 'error',
     'space-before-blocks': 'error',
     'space-before-function-paren': [
       'error',

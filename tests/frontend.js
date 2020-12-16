@@ -2,8 +2,8 @@
 
 module.exports = {
   extends: [
-    'etherpad/browser',
-    'etherpad/tests',
+    '../browser.js',
+    '../tests.js',
   ],
   globals: {
     _: 'readonly',

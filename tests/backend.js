@@ -2,7 +2,7 @@
 
 module.exports = {
   extends: [
-    'etherpad/node',
-    'etherpad/tests',
+    '../node.js',
+    '../tests.js',
   ],
 };

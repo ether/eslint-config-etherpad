@@ -58,34 +58,34 @@ module.exports = {
   overrides: [
     {
       files: ['**/.eslintrc.js'],
-      extends: 'etherpad/node',
+      extends: './node.js',
     },
     {
       files: ['**/*'],
       excludedFiles: ['**/.eslintrc.js', 'static/js/**/*', 'static/tests/frontend/**/*'],
-      extends: 'etherpad/node',
+      extends: './node.js',
       ...commonNodeOverrides,
     },
     {
       files: ['static/js/**/*'],
       excludedFiles: ['**/.eslintrc.js'],
-      extends: 'etherpad/browser',
+      extends: './browser.js',
     },
     {
       files: ['static/tests/**/*'],
       excludedFiles: ['**/.eslintrc.js'],
-      extends: 'etherpad/tests',
+      extends: './tests.js',
     },
     {
       files: ['static/tests/backend/**/*'],
       excludedFiles: ['**/.eslintrc.js'],
-      extends: 'etherpad/tests/backend',
+      extends: './tests/backend.js',
       ...commonNodeOverrides,
     },
     {
       files: ['static/tests/frontend/**/*'],
       excludedFiles: ['**/.eslintrc.js'],
-      extends: 'etherpad/tests/frontend',
+      extends: './tests/frontend.js',
     },
   ],
 };

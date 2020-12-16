@@ -2,7 +2,7 @@
 
 module.exports = {
   extends: [
-    'etherpad',
+    './index.js',
   ],
   env: {
     browser: true,

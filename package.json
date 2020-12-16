@@ -19,7 +19,7 @@
   "homepage": "https://github.com/ether/eslint-config-etherpad#readme",
   "eslintConfig": {
     "root": true,
-    "extends": "etherpad/node"
+    "extends": "./node.js"
   },
   "scripts": {
     "lint": "eslint ."

@@ -54,6 +54,8 @@ module.exports = {
       },
       MemberExpression: 2,
       SwitchCase: 1,
+      flatTernaryExpressions: true,
+      offsetTernaryExpressions: true,
     }],
     'key-spacing': 'error',
     'keyword-spacing': 'error',

@@ -27,6 +27,7 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
     ```shell
     npm install --save-dev \
         eslint \
+        eslint-plugin-eslint-comments \
         eslint-plugin-mocha \
         eslint-plugin-node \
         eslint-plugin-prefer-arrow \

@@ -1,13 +1,14 @@
 name: Node.js Package
 
 on:
+  pull_request:
   push:
     branches:
       - main
       - master
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,7 +19,8 @@ jobs:
       - run: npm test
 
   publish-npm:
-    needs: build
+    if: github.event_name == 'push'
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

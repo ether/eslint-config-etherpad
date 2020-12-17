@@ -8,11 +8,13 @@ module.exports = {
     'eslint:recommended',
     'plugin:eslint-comments/recommended',
     'plugin:promise/recommended',
+    'plugin:you-dont-need-lodash-underscore/compatible',
   ],
   plugins: [
     'eslint-comments',
     'prefer-arrow',
     'promise',
+    'you-dont-need-lodash-underscore',
   ],
   rules: {
     'array-bracket-newline': ['error', 'consistent'],

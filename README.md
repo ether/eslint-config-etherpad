@@ -32,6 +32,7 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
         eslint-plugin-node \
         eslint-plugin-prefer-arrow \
         eslint-plugin-promise \
+        eslint-plugin-you-dont-need-lodash-underscore \
         eslint-config-etherpad
     ```
 

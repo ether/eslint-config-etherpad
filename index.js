@@ -112,6 +112,7 @@ module.exports = {
     'prefer-arrow-callback': 'error',
     'prefer-arrow/prefer-arrow-functions': 'error',
     'prefer-const': 'error',
+    'prefer-exponentiation-operator': 'error',
     'prefer-promise-reject-errors': 'error',
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',

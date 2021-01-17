@@ -122,6 +122,13 @@ module.exports = {
     'promise/always-return': 'off',
     // This rule is largely unnecessary because most browsers now log unhandled Promise rejections.
     'promise/catch-or-return': 'off',
+    // Too many false positives. The docs for this rule say to use nodify, but in the following
+    // example nodeify and util.callbackify() don't work because the `next` callback should not
+    // always be called:
+    //     app.use((req, res, next) => { asyncMiddleware(req, res, next).catch(next); });
+    // This rule does catch legitimate issues, but as code is modernized with `async` and `await`,
+    // this rule will become less relevant.
+    'promise/no-callback-in-promise': 'off',
     'quote-props': ['error', 'consistent-as-needed'],
     'quotes': ['error', 'single', {avoidEscape: true}],
     'rest-spread-spacing': 'error',

@@ -129,6 +129,21 @@ module.exports = {
     // This rule does catch legitimate issues, but as code is modernized with `async` and `await`,
     // this rule will become less relevant.
     'promise/no-callback-in-promise': 'off',
+    // Too many false positives. In particular, there is no good way to process in parallel values
+    // that were obtained asynchronously unless nested .then() calls are used. Example:
+    //     asyncGetItems().then((items) => Promise.all(
+    //         items.map((item) => asyncProcessItem(item).then(asyncConveyResults))));
+    // The nested .then() in the above example can be avoided by changing the logic like this:
+    //     asyncGetItems()
+    //         .then((items) => Promise.all(items.map(asyncProcessItem)))
+    //         .then((results) => Promise.all(results.map(asyncConveyResults)));
+    // but there are problems with the logic change:
+    //   * No result will be conveyed if any of the processing calls fail.
+    //   * No result will be conveyed until all items are done being processed.
+    // The proper way to address nested .then() calls is to use await instead of .then(), but that
+    // should be the topic of a different ESLint rule. This rule does catch legitimate issues, but
+    // as code is modernized with `async` and `await`, this rule will become less relevant.
+    'promise/no-nesting': 'off',
     'quote-props': ['error', 'consistent-as-needed'],
     'quotes': ['error', 'single', {avoidEscape: true}],
     'rest-spread-spacing': 'error',

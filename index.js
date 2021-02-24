@@ -75,6 +75,7 @@ module.exports = {
     'new-parens': 'error',
     'no-array-constructor': 'error',
     'no-caller': 'error',
+    'no-constant-condition': ['error', {checkLoops: false}],
     'no-duplicate-imports': 'error',
     'no-eval': 'error',
     'no-extend-native': 'error',

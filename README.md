@@ -14,6 +14,8 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 * **`etherpad/tests`**: Extends `etherpad` for test code.
 * **`etherpad/tests/backend`**: Extends `etherpad/node` and `etherpad/tests` for
   backend test code.
+* **`etherpad/tests/cypress`**: Extends `etherpad/node` and `etherpad/tests` for
+  [Cypress](https://www.cypress.io/) test code.
 * **`etherpad/tests/frontend`**: Extends `etherpad/browser` and `etherpad/tests`
   for frontend test code.
 * **`etherpad/plugin`**: Applies the above configs to the appropriate files.
@@ -27,13 +29,13 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
     ```shell
     npm install --save-dev \
         eslint \
+        eslint-plugin-cypress \
         eslint-plugin-eslint-comments \
         eslint-plugin-mocha \
         eslint-plugin-node \
         eslint-plugin-prefer-arrow \
         eslint-plugin-promise \
         eslint-plugin-you-dont-need-lodash-underscore \
-        eslint-plugin-cypress \
         eslint-config-etherpad
     ```
 

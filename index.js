@@ -90,6 +90,7 @@ module.exports = {
     'no-nonoctal-decimal-escape': 'error',
     'no-prototype-builtins': 'error',
     'no-script-url': 'error',
+    'no-sequences': 'error',
     'no-tabs': 'error',
     'no-throw-literal': 'error',
     'no-trailing-spaces': 'error',

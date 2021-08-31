@@ -25,7 +25,7 @@ module.exports = {
     'arrow-spacing': 'error',
     'block-spacing': 'error',
     'brace-style': ['error', '1tbs', {allowSingleLine: true}],
-    'camelcase': ['warn', {allow: ['^ace_', '^eejsBlock_', '^handleClientMessage_']}],
+    'camelcase': ['warn', {allow: ['^ace_', '^eejsBlock_', '^ep_', '^handleClientMessage_']}],
     'comma-dangle': ['error', {
       arrays: 'always-multiline',
       objects: 'always-multiline',

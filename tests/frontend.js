@@ -15,5 +15,7 @@ module.exports = {
     'mocha/max-top-level-suites': 'off',
     // Each frontend test spec file is wrapped inside a `describe()`.
     'mocha/no-global-tests': 'off',
+    // Each frontend test spec file is wrapped inside a `describe()`.
+    'mocha/no-top-level-hooks': 'off',
   },
 };

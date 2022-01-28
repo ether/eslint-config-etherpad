@@ -87,14 +87,12 @@ module.exports = {
     'no-multiple-empty-lines': ['error', {max: 2, maxBOF: 0, maxEOF: 0}],
     'no-new-object': 'error',
     'no-new-wrappers': 'error',
-    'no-nonoctal-decimal-escape': 'error',
     'no-prototype-builtins': 'error',
     'no-script-url': 'error',
     'no-sequences': 'error',
     'no-tabs': 'error',
     'no-throw-literal': 'error',
     'no-trailing-spaces': 'error',
-    'no-unsafe-optional-chaining': 'error',
     'no-unused-vars': ['error', {args: 'none'}],
     // There is a lot of existing code that intentionally declares functions below their use.
     // Hopefully that code will be updated, but until then this is set to warn to keep CI tests from

@@ -26,7 +26,7 @@
     "lint:fix": "eslint --fix ."
   },
   "engines": {
-    "node": ">=12.13.0"
+    "node": ">=12.17.0"
   },
   "peerDependencies": {
     "eslint": "^8.7.0",

@@ -12,6 +12,7 @@ module.exports = {
     'mocha',
   ],
   rules: {
+    'mocha/no-empty-description': 'error',
     'mocha/no-hooks-for-single-case': 'off',
     'mocha/no-return-from-async': 'error',
     // Disabled due to false positives:

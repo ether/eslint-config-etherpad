@@ -12,9 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 12
+          cache: 'npm'
       - run: npm ci
       - run: npm test
       - run: npm run lint
@@ -29,13 +30,13 @@ jobs:
           # Fetch tags so that we can skip 'npm version patch' if there are no
           # changes since the latest tag.
           fetch-depth: 0
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
+          cache: 'npm'
       - name: Bump version (patch)
         run: |
-          set -e
           LATEST_TAG=$(git describe --tags --abbrev=0) || exit 1
           NEW_COMMITS=$(git rev-list --count "${LATEST_TAG}"..) || exit 1
           [ "${NEW_COMMITS}" -gt 0 ] || exit 0
@@ -55,5 +56,9 @@ jobs:
       # back-to-back merges will cause the first merge's workflow to fail but
       # the second's will succeed.
       - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Add package to etherpad organization
+        run: npm access grant read-write etherpad:developers
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

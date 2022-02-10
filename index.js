@@ -26,15 +26,7 @@ module.exports = {
     'block-spacing': 'error',
     'brace-style': ['error', '1tbs', {allowSingleLine: true}],
     'camelcase': ['warn', {allow: ['^ace_', '^eejsBlock_', '^ep_', '^handleClientMessage_']}],
-    'comma-dangle': ['error', {
-      arrays: 'always-multiline',
-      objects: 'always-multiline',
-      imports: 'always-multiline',
-      exports: 'always-multiline',
-      // Trailing commas for function declarations and function calls is only supported in
-      // ECMAScript 2017 and newer.
-      functions: 'never',
-    }],
+    'comma-dangle': ['error', 'always-multiline'],
     'comma-spacing': 'error',
     'comma-style': 'error',
     'computed-property-spacing': 'error',

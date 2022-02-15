@@ -7,11 +7,13 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:eslint-comments/recommended',
+    'plugin:import/recommended',
     'plugin:promise/recommended',
     'plugin:you-dont-need-lodash-underscore/compatible',
   ],
   plugins: [
     'eslint-comments',
+    'import',
     'prefer-arrow',
     'promise',
     'you-dont-need-lodash-underscore',

@@ -44,12 +44,6 @@ module.exports = {
       CallExpression: {
         arguments: 2,
       },
-      FunctionDeclaration: {
-        parameters: 2,
-      },
-      FunctionExpression: {
-        parameters: 2,
-      },
       MemberExpression: 2,
       SwitchCase: 1,
       flatTernaryExpressions: true,

@@ -1,5 +1,40 @@
 'use strict';
 
+const tsExts = ['.ts', '.tsx', '.cts', '.mts'];
+
+const sharedEsTsRules = {
+  'brace-style': ['error', '1tbs', {allowSingleLine: true}],
+  'comma-dangle': ['error', 'always-multiline'],
+  'comma-spacing': 'error',
+  'dot-notation': 'error',
+  'func-call-spacing': 'error',
+  'indent': ['error', 2, {
+    CallExpression: {
+      arguments: 2,
+    },
+    MemberExpression: 2,
+    SwitchCase: 1,
+    flatTernaryExpressions: true,
+    offsetTernaryExpressions: true,
+  }],
+  'keyword-spacing': 'error',
+  'no-array-constructor': 'error',
+  'no-duplicate-imports': 'error',
+  'no-implied-eval': 'error',
+  'no-throw-literal': 'error',
+  'no-unused-vars': ['error', {args: 'none'}],
+  // There is a lot of existing code that intentionally declares functions below their use.
+  // Hopefully that code will be updated, but until then this is set to warn to keep CI tests from
+  // failing.
+  'no-use-before-define': 'warn',
+  'object-curly-spacing': 'error',
+  'quotes': ['error', 'single', {avoidEscape: true}],
+  'semi': 'error',
+  'space-before-function-paren':
+      ['error', {anonymous: 'always', asyncArrow: 'always', named: 'never'}],
+  'space-infix-ops': 'error',
+};
+
 module.exports = {
   env: {
     es2017: true,
@@ -19,6 +54,7 @@ module.exports = {
     'you-dont-need-lodash-underscore',
   ],
   rules: {
+    ...sharedEsTsRules,
     'array-bracket-newline': ['error', 'consistent'],
     'array-bracket-spacing': 'error',
     'array-element-newline': ['error', 'consistent'],
@@ -26,31 +62,16 @@ module.exports = {
     'arrow-parens': 'error',
     'arrow-spacing': 'error',
     'block-spacing': 'error',
-    'brace-style': ['error', '1tbs', {allowSingleLine: true}],
     'camelcase': ['warn', {allow: ['^ace_', '^eejsBlock_', '^ep_', '^handleClientMessage_']}],
-    'comma-dangle': ['error', 'always-multiline'],
-    'comma-spacing': 'error',
     'comma-style': 'error',
     'computed-property-spacing': 'error',
     'curly': ['error', 'multi-line', 'consistent'],
     'dot-location': ['error', 'property'],
-    'dot-notation': 'error',
     'eol-last': 'error',
     'eqeqeq': ['error', 'always', {null: 'never'}],
-    'func-call-spacing': 'error',
     'guard-for-in': 'error',
     'implicit-arrow-linebreak': 'error',
-    'indent': ['error', 2, {
-      CallExpression: {
-        arguments: 2,
-      },
-      MemberExpression: 2,
-      SwitchCase: 1,
-      flatTernaryExpressions: true,
-      offsetTernaryExpressions: true,
-    }],
     'key-spacing': 'error',
-    'keyword-spacing': 'error',
     'linebreak-style': 'error',
     'max-len': ['error', {
       code: 100,
@@ -66,14 +87,11 @@ module.exports = {
       ],
     }],
     'new-parens': 'error',
-    'no-array-constructor': 'error',
     'no-caller': 'error',
     'no-constant-condition': ['error', {checkLoops: false}],
-    'no-duplicate-imports': 'error',
     'no-eval': 'error',
     'no-extend-native': 'error',
     'no-implicit-globals': 'error',
-    'no-implied-eval': 'error',
     'no-lonely-if': 'error',
     'no-multi-spaces': 'error',
     'no-multi-str': 'error',
@@ -84,18 +102,11 @@ module.exports = {
     'no-script-url': 'error',
     'no-sequences': 'error',
     'no-tabs': 'error',
-    'no-throw-literal': 'error',
     'no-trailing-spaces': 'error',
-    'no-unused-vars': ['error', {args: 'none'}],
-    // There is a lot of existing code that intentionally declares functions below their use.
-    // Hopefully that code will be updated, but until then this is set to warn to keep CI tests from
-    // failing.
-    'no-use-before-define': 'warn',
     'no-var': 'error',
     'no-whitespace-before-property': 'error',
     'nonblock-statement-body-position': 'error',
     'object-curly-newline': 'error',
-    'object-curly-spacing': 'error',
     'object-shorthand': 'error',
     'one-var': ['error', {initialized: 'never'}],
     'one-var-declaration-per-line': ['error', 'initializations'],
@@ -138,18 +149,11 @@ module.exports = {
     // as code is modernized with `async` and `await`, this rule will become less relevant.
     'promise/no-nesting': 'off',
     'quote-props': ['error', 'consistent-as-needed'],
-    'quotes': ['error', 'single', {avoidEscape: true}],
     'rest-spread-spacing': 'error',
-    'semi': 'error',
     'semi-spacing': 'error',
     'semi-style': 'error',
     'space-before-blocks': 'error',
-    'space-before-function-paren': [
-      'error',
-      {anonymous: 'always', asyncArrow: 'always', named: 'never'},
-    ],
     'space-in-parens': 'error',
-    'space-infix-ops': 'error',
     'space-unary-ops': ['error', {words: true, nonwords: false}],
     'spaced-comment': 'error',
     'strict': ['error', 'global'],
@@ -157,4 +161,41 @@ module.exports = {
     'template-curly-spacing': 'error',
     'template-tag-spacing': 'error',
   },
+  overrides: [
+    {
+      files: tsExts.map((p) => [`*${p}`, `.*${p}`]).flat(),
+      parser: '@typescript-eslint/parser',
+      plugins: ['@typescript-eslint'],
+      extends: [
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:import/typescript',
+      ],
+      rules: {
+        ...Object.fromEntries(Object.entries(sharedEsTsRules).map(([k]) => [k, 'off'])),
+        ...Object.fromEntries(Object.entries(sharedEsTsRules).map(
+            ([k, v]) => [`@typescript-eslint/${k}`, v])),
+        '@typescript-eslint/indent': [...sharedEsTsRules.indent.slice(0, -1), {
+          ...sharedEsTsRules.indent.slice(-1)[0],
+          // https://github.com/typescript-eslint/typescript-eslint/issues/1824
+          ignoredNodes: [
+            'TSTypeAliasDeclaration *',
+            'TSTypeParameterInstantiation',
+          ],
+        }],
+        '@typescript-eslint/no-empty-function': 'off',
+        '@typescript-eslint/require-await': 'off',
+      },
+      settings: {
+        'import/parsers': {
+          '@typescript-eslint/parser': tsExts,
+        },
+        'import/resolver': {
+          typescript: {
+            alwaysTryTypes: true,
+          },
+        },
+      },
+    },
+  ],
 };

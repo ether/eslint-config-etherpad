@@ -52,7 +52,12 @@ module.exports = {
     'key-spacing': 'error',
     'keyword-spacing': 'error',
     'linebreak-style': 'error',
-    'max-len': ['error', {code: 100, tabWidth: 2, ignoreUrls: true}],
+    'max-len': ['error', {
+      code: 100,
+      ignorePattern: '\\s*/[/*] eslint-',
+      ignoreUrls: true,
+      tabWidth: 2,
+    }],
     'new-cap': ['error', {
       capIsNewExceptions: [
         // ERR is an async-stacktrace convention. Remove this exception after modernizing code to

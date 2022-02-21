@@ -1,7 +1,5 @@
 'use strict';
 
-const tsExts = ['.ts', '.tsx', '.cts', '.mts'];
-
 module.exports = {
   plugins: [
     'node',
@@ -18,7 +16,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: tsExts.map((p) => [`*${p}`, `.*${p}`]).flat(),
+      files: ['.ts', '.tsx', '.cts', '.mts'].map((p) => [`*${p}`, `.*${p}`]).flat(),
       rules: {
         'node/no-missing-import': ['error', {
           tryExtensions: ['.js', '.cjs', '.mjs', '.ts', '.cts', '.mts', '.json', '.node'],

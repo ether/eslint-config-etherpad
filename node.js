@@ -17,10 +17,10 @@ module.exports = {
   overrides: [
     {
       files: ['.ts', '.tsx', '.cts', '.mts'].map((p) => [`*${p}`, `.*${p}`]).flat(),
-      rules: {
-        'node/no-missing-import': ['error', {
+      settings: {
+        node: {
           tryExtensions: ['.js', '.cjs', '.mjs', '.ts', '.cts', '.mts', '.json', '.node'],
-        }],
+        },
       },
     },
   ],

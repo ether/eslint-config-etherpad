@@ -87,7 +87,7 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 
     ```json
       "engines": {
-        "node": ">=10.13.0"
+        "node": ">=12.17.0"
       },
     ```
 

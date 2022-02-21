@@ -39,18 +39,20 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
         eslint-config-etherpad
     ```
 
-2.  Edit your `package.json` to use the shareable config:
+2.  Create a `.eslintrc.cjs` in your project's root directory:
 
-    ```json
-      "eslintConfig": {
-        "root": true,
-        "extends": "etherpad/plugin"
-      },
+    ```javascript
+    'use strict';
+
+    module.exports = {
+      root: true,
+      extends: 'etherpad/plugin',
+    };
     ```
 
 3. If you `require('ep_etherpad-lite/*')` anywhere in your server-side code, add
-   a peer dependency so that the `node` ESLint plugin won't complain about
-   unavailable modules:
+   a peer dependency to your `package.json` so that the `node` ESLint plugin
+   won't complain about unavailable modules:
 
    ```json
       "peerDependencies": {
@@ -71,8 +73,8 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
    update a regular dependency, so remember to re-run the above command each
    time you run `npm install`.
 
-4. *Optional but recommended:* Define a `lint` script so that you can run `npm
-   run lint` to check the code:
+4. *Optional but recommended:* Define a `lint` script in your `package.json` so
+   that you can run `npm run lint` to check the code:
 
     ```json
       "scripts": {
@@ -108,22 +110,24 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 
 If you need to tune the configs, you can specify
 [overrides](https://eslint.org/docs/user-guide/configuring#configuration-based-on-glob-patterns)
-in your `package.json`. For example:
+in your `.eslintrc.cjs`. For example:
 
-```json
-  "eslintConfig": {
-    "root": true,
-    "extends": "etherpad/plugin",
-    "overrides": [
-      {
-        "files": ["static/js/shared/**/*"],
-        "env": {
-          "shared-node-browser": true
-        },
-        "extends": "etherpad/node"
-      }
-    ]
-  },
+```javascript
+'use strict';
+
+module.exports = {
+  root: true,
+  extends: 'etherpad/plugin',
+  overrides: [
+    {
+      files: ['static/js/shared/**/*'],
+      env: {
+        shared-node-browser: true,
+      },
+      extends: 'etherpad/node',
+    },
+  ],
+};
 ```
 
 ## Copyright and License

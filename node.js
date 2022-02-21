@@ -8,6 +8,11 @@ module.exports = {
     './index.js',
     'plugin:node/recommended',
   ],
+  settings: {
+    node: {
+      tryExtensions: ['.js', '.cjs', '.mjs', '.json', '.node'],
+    },
+  },
   env: {
     node: true,
   },

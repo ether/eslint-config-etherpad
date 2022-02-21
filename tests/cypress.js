@@ -17,6 +17,7 @@ module.exports = {
     'mocha/no-mocha-arrows': 'off',
     'mocha/no-synchronous-tests': 'off',
     'mocha/prefer-arrow-callback': 'off',
+    'node/no-unpublished-require': 'off', // It's OK for tests to use devDependencies.
     'prefer-arrow-callback': 'error',
     'prefer-arrow/prefer-arrow-functions': 'error',
   },

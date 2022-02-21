@@ -21,6 +21,12 @@ module.exports = {
   ],
   overrides: [
     {
+      files: ['.eslintrc.*'],
+      rules: {
+        'node/no-unpublished-require': 'off',
+      },
+    },
+    {
       files: ['.ts', '.tsx', '.cts', '.mts'].map((p) => [`*${p}`, `.*${p}`]).flat(),
       settings: {
         node: {

@@ -53,6 +53,12 @@ module.exports = {
     'promise',
     'you-dont-need-lodash-underscore',
   ],
+  parserOptions: {
+    // plugin:import/recommended sets sourceType to module. Change it back to script because most
+    // Etherpad core and plugin code is still CommonJS. The node plugin will change it to module if
+    // package.json sets type to module.
+    sourceType: 'script',
+  },
   rules: {
     ...sharedEsTsRules,
     'array-bracket-newline': ['error', 'consistent'],

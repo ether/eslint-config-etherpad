@@ -3,6 +3,9 @@
 const tsExts = ['.ts', '.tsx', '.cts', '.mts'];
 
 module.exports = {
+  plugins: [
+    'node',
+  ],
   extends: [
     './index.js',
     'plugin:node/recommended',
@@ -12,9 +15,6 @@ module.exports = {
   },
   ignorePatterns: [
     'node_modules/',
-  ],
-  plugins: [
-    'node',
   ],
   overrides: [
     {

@@ -1,17 +1,17 @@
 'use strict';
 
 module.exports = {
-  env: {
-    'cypress/globals': true,
-  },
+  plugins: [
+    'cypress',
+  ],
   extends: [
     '../node.js',
     '../tests.js',
     'plugin:cypress/recommended',
   ],
-  plugins: [
-    'cypress',
-  ],
+  env: {
+    'cypress/globals': true,
+  },
   rules: {
     // Cypress prefers synchronous arrow functions passed to Mocha functions.
     'mocha/no-mocha-arrows': 'off',

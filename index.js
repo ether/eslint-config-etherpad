@@ -36,16 +36,6 @@ const sharedEsTsRules = {
 };
 
 module.exports = {
-  env: {
-    es2017: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:eslint-comments/recommended',
-    'plugin:import/recommended',
-    'plugin:promise/recommended',
-    'plugin:you-dont-need-lodash-underscore/compatible',
-  ],
   plugins: [
     'eslint-comments',
     'import',
@@ -53,6 +43,16 @@ module.exports = {
     'promise',
     'you-dont-need-lodash-underscore',
   ],
+  extends: [
+    'eslint:recommended',
+    'plugin:eslint-comments/recommended',
+    'plugin:import/recommended',
+    'plugin:promise/recommended',
+    'plugin:you-dont-need-lodash-underscore/compatible',
+  ],
+  env: {
+    es2017: true,
+  },
   parserOptions: {
     // plugin:import/recommended sets sourceType to module. Change it back to script because most
     // Etherpad core and plugin code is still CommonJS. The node plugin will change it to module if

@@ -1,16 +1,16 @@
 'use strict';
 
 module.exports = {
-  env: {
-    mocha: true,
-  },
+  plugins: [
+    'mocha',
+  ],
   extends: [
     './index.js',
     'plugin:mocha/recommended',
   ],
-  plugins: [
-    'mocha',
-  ],
+  env: {
+    mocha: true,
+  },
   rules: {
     'mocha/no-empty-description': 'error',
     'mocha/no-hooks-for-single-case': 'off',

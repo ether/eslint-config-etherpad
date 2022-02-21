@@ -27,22 +27,16 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 1.  Install the shareable config and its dependencies:
 
     ```shell
-    npm install --save-dev \
-        eslint \
-        eslint-plugin-cypress \
-        eslint-plugin-eslint-comments \
-        eslint-plugin-mocha \
-        eslint-plugin-node \
-        eslint-plugin-prefer-arrow \
-        eslint-plugin-promise \
-        eslint-plugin-you-dont-need-lodash-underscore \
-        eslint-config-etherpad
+    npm install --save-dev eslint eslint-config-etherpad typescript
     ```
 
 2.  Create a `.eslintrc.cjs` in your project's root directory:
 
     ```javascript
     'use strict';
+
+    // This is a workaround for https://github.com/eslint/eslint/issues/3458
+    require('eslint-config-etherpad/patch/modern-module-resolution');
 
     module.exports = {
       root: true,
@@ -114,6 +108,9 @@ in your `.eslintrc.cjs`. For example:
 
 ```javascript
 'use strict';
+
+// This is a workaround for https://github.com/eslint/eslint/issues/3458
+require('eslint-config-etherpad/patch/modern-module-resolution');
 
 module.exports = {
   root: true,

@@ -17,10 +17,6 @@
     "url": "https://github.com/ether/eslint-config-etherpad/issues"
   },
   "homepage": "https://github.com/ether/eslint-config-etherpad#readme",
-  "eslintConfig": {
-    "root": true,
-    "extends": "./node.js"
-  },
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
@@ -29,24 +25,13 @@
     "node": ">=12.17.0"
   },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.12.0",
-    "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.9.0",
-    "eslint-import-resolver-typescript": "^2.5.0",
-    "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-mocha": "^10.0.3",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-you-dont-need-lodash-underscore": "^6.12.0",
     "typescript": "^4.5.5"
   },
-  "devDependencies": {
+  "dependencies": {
+    "@rushstack/eslint-patch": "^1.1.0",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
-    "eslint": "^8.9.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
@@ -55,7 +40,10 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-you-dont-need-lodash-underscore": "^6.12.0",
+    "eslint-plugin-you-dont-need-lodash-underscore": "^6.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
     "typescript": "^4.5.5"
   }
 }

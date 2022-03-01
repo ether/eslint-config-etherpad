@@ -68,7 +68,7 @@ module.exports = {
     'arrow-parens': 'error',
     'arrow-spacing': 'error',
     'block-spacing': 'error',
-    'camelcase': ['warn', {allow: ['^ace_', '^eejsBlock_', '^ep_', '^handleClientMessage_']}],
+    'camelcase': ['warn', {allow: ['^ace_', '^eejsBlock_', '(?:^|_)ep_', '^handleClientMessage_']}],
     'comma-style': 'error',
     'computed-property-spacing': 'error',
     'curly': ['error', 'multi-line', 'consistent'],

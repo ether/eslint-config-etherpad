@@ -8,6 +8,11 @@ module.exports = {
     './index.js',
     'plugin:node/recommended',
   ],
+  parserOptions: {
+    // Set to at least 2020 to enable support for dynamic import(). This only affects how the code
+    // is parsed -- it does not affect what features rules will allow.
+    ecmaVersion: 2020,
+  },
   settings: {
     node: {
       tryExtensions: ['.js', '.cjs', '.mjs', '.json', '.node'],

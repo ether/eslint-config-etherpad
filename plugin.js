@@ -2,7 +2,7 @@
 
 const commonNodeOverrides = {
   rules: {
-    'node/no-missing-require': ['error', {
+    'n/no-missing-require': ['error', {
       allowModules: [
         // Disable the node/no-missing-require rule for `require('ep_etherpad-lite/foo')`. It would
         // be nice to warn plugin devs that their plugin is requiring a core Etherpad module that

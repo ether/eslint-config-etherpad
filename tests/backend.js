@@ -6,6 +6,6 @@ module.exports = {
     '../tests.js',
   ],
   rules: {
-    'node/no-unpublished-require': 'off', // It's OK for tests to use devDependencies.
+    'n/no-unpublished-require': 'off', // It's OK for tests to use devDependencies.
   },
 };

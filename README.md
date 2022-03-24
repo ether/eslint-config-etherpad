@@ -45,8 +45,8 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
     ```
 
 3. If you `require('ep_etherpad-lite/*')` anywhere in your server-side code, add
-   a peer dependency to your `package.json` so that the `node` ESLint plugin
-   won't complain about unavailable modules:
+   a peer dependency to your `package.json` so that the `n` ESLint plugin (for
+   Node.js) won't complain about unavailable modules:
 
    ```json
       "peerDependencies": {
@@ -79,7 +79,8 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 5. *Optional but recommended:* Specify the minimum version of Node.js you
     support (ideally this would match [Etherpad's minimum required
     version](https://github.com/ether/etherpad-lite#requirements)) so that the
-    `node` ESLint plugin can warn you when you use incompatible features:
+    `n` ESLint plugin (for Node.js) can warn you when you use incompatible
+    features:
 
     ```json
       "engines": {

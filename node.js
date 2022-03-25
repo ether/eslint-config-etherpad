@@ -13,11 +13,6 @@ module.exports = {
     // is parsed -- it does not affect what features rules will allow.
     ecmaVersion: 2020,
   },
-  settings: {
-    n: {
-      tryExtensions: ['.js', '.cjs', '.mjs', '.json', '.node'],
-    },
-  },
   env: {
     node: true,
   },

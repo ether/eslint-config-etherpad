@@ -27,7 +27,7 @@ module.exports = {
       },
     },
     {
-      files: ['.ts', '.tsx', '.cts', '.mts'].map((p) => [`*${p}`, `.*${p}`]).flat(),
+      files: ['*.ts', '*.tsx', '*.cts', '*.mts'].map((p) => [p, `.${p}`]).flat(),
       settings: {
         n: {
           tryExtensions: ['.js', '.cjs', '.mjs', '.ts', '.cts', '.mts', '.json', '.node'],

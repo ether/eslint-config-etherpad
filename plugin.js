@@ -81,6 +81,20 @@ module.exports = {
       excludedFiles: ['**/.eslintrc.js'],
       extends: './tests/backend.js',
       ...commonNodeOverrides,
+      overrides: [
+        {
+          files: [
+            'static/tests/backend/**/*',
+          ],
+          excludedFiles: [
+            'static/tests/backend/specs/**/*',
+          ],
+          rules: {
+            'mocha/no-exports': 'off',
+            'mocha/no-top-level-hooks': 'off',
+          },
+        },
+      ],
     },
     {
       files: ['static/tests/frontend/**/*'],

@@ -79,7 +79,12 @@ jobs:
           [ "${NEW_COMMITS}" -gt 0 ] || exit 0
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          pnpm i
+          # Use --frozen-lockfile so the install can't modify pnpm-lock.yaml
+          # during publish. A dirty tree makes `pnpm version patch` abort with
+          # "Git working directory not clean". If the lockfile is genuinely
+          # out of sync, the earlier `test` job (which runs `pnpm install`
+          # without --frozen-lockfile) will have flagged it on the PR.
+          pnpm i --frozen-lockfile
           pnpm version patch
           git push --follow-tags
       # This is required if the package has a prepare script that uses something

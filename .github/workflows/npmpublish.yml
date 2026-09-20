@@ -19,7 +19,7 @@ jobs:
       -
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 24
       - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
@@ -38,7 +38,10 @@ jobs:
               ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install
-      - run: npm run lint
+      # Lints this package with ESLint 8 via the eslintrc entry points, then again with ESLint 10
+      # via the flat-config entry points. Both formats have to keep working: ~80 plugin repos are
+      # still on `.eslintrc.cjs` while newer ones are on `eslint.config.js`.
+      - run: npm run test
 
 
   publish-npm:

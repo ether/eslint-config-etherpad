@@ -21,9 +21,13 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['.eslintrc.*'],
+      // ESLint's own config file is not part of the package's published API, but it is usually
+      // published (plugins rarely set `files` in `package.json`) and it requires devDependencies,
+      // which is exactly what `n/no-unpublished-require` complains about.
+      files: ['.eslintrc.*', 'eslint.config.*'],
       rules: {
         'n/no-unpublished-require': 'off',
+        'n/no-unpublished-import': 'off',
       },
     },
     {

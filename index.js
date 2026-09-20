@@ -2,6 +2,27 @@
 
 const tsExts = ['.ts', '.tsx', '.cts', '.mts'];
 
+// Rules from `sharedEsTsRules` that @typescript-eslint still provides a TypeScript-aware
+// "extension rule" for. As of @typescript-eslint v8 all of the purely stylistic extension rules
+// (brace-style, comma-dangle, comma-spacing, func-call-spacing, indent, keyword-spacing,
+// object-curly-spacing, quotes, semi, space-before-function-paren, space-infix-ops) have been
+// deleted upstream, and `@typescript-eslint/no-duplicate-imports` is gone too. For those, the
+// plain ESLint core rule is left enabled on TypeScript files instead of being switched off, so
+// the same things are still checked.
+const tsExtensionRules = [
+  'dot-notation',
+  'no-array-constructor',
+  'no-implied-eval',
+  'no-unused-vars',
+  'no-use-before-define',
+];
+
+// Extension rules that @typescript-eslint v8 renamed. Key is the core rule name (as used in
+// `sharedEsTsRules`), value is the new name within the `@typescript-eslint/` namespace.
+const tsRenamedExtensionRules = {
+  'no-throw-literal': 'only-throw-error',
+};
+
 const sharedEsTsRules = {
   'brace-style': ['error', '1tbs', {allowSingleLine: true}],
   'comma-dangle': ['error', 'always-multiline'],
@@ -45,7 +66,6 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
-    'plugin:eslint-comments/recommended',
     'plugin:import/recommended',
     'plugin:promise/recommended',
     'plugin:you-dont-need-lodash-underscore/compatible',
@@ -75,6 +95,18 @@ module.exports = {
     'dot-location': ['error', 'property'],
     'eol-last': 'error',
     'eqeqeq': ['error', 'always', {null: 'never'}],
+    // These are `plugin:eslint-comments/recommended`, inlined. The upstream config can't be used
+    // directly: `eslint-plugin-eslint-comments` is unmaintained and blows up on ESLint 10, so this
+    // package depends on the maintained `@eslint-community` fork aliased back to the original
+    // package name. That keeps the rule namespace `eslint-comments/` (and therefore every
+    // `eslint-disable eslint-comments/...` comment in the ~80 plugin repos) working, but the
+    // fork's own `recommended` config hard-codes the `@eslint-community/eslint-comments/`
+    // namespace, so it has to be spelled out here instead of extended.
+    'eslint-comments/disable-enable-pair': 'error',
+    'eslint-comments/no-aggregating-enable': 'error',
+    'eslint-comments/no-duplicate-disable': 'error',
+    'eslint-comments/no-unlimited-disable': 'error',
+    'eslint-comments/no-unused-enable': 'error',
     'guard-for-in': 'error',
     'implicit-arrow-linebreak': 'error',
     'key-spacing': 'error',
@@ -178,10 +210,16 @@ module.exports = {
         'plugin:import/typescript',
       ],
       rules: {
-        ...Object.fromEntries(Object.entries(sharedEsTsRules).map(([k]) => [k, 'off'])),
-        ...Object.fromEntries(Object.entries(sharedEsTsRules).map(
-            ([k, v]) => [`@typescript-eslint/${k}`, v])),
-        '@typescript-eslint/indent': [...sharedEsTsRules.indent.slice(0, -1), {
+        // Turn the core rule off only where @typescript-eslint has a TypeScript-aware replacement.
+        ...Object.fromEntries([
+          ...tsExtensionRules,
+          ...Object.keys(tsRenamedExtensionRules),
+        ].map((k) => [k, 'off'])),
+        ...Object.fromEntries(
+            tsExtensionRules.map((k) => [`@typescript-eslint/${k}`, sharedEsTsRules[k]])),
+        ...Object.fromEntries(Object.entries(tsRenamedExtensionRules).map(
+            ([k, v]) => [`@typescript-eslint/${v}`, sharedEsTsRules[k]])),
+        'indent': [...sharedEsTsRules.indent.slice(0, -1), {
           ...sharedEsTsRules.indent.slice(-1)[0],
           // https://github.com/typescript-eslint/typescript-eslint/issues/1824
           ignoredNodes: [

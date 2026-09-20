@@ -6,6 +6,20 @@ by [Etherpad](https://etherpad.org/) and Etherpad plugins in the
 https://github.com/ether namespace. You are encouraged to use it for your own
 Etherpad plugins so that your code stays consistent with the Etherpad codebase.
 
+## ESLint 8 or ESLint 9/10?
+
+This package ships the same rule set in both config formats:
+
+* **eslintrc** (`.eslintrc.cjs`) — for ESLint 8. Entry points are `etherpad`,
+  `etherpad/node`, `etherpad/plugin`, etc. (see below).
+* **flat config** (`eslint.config.js`) — for ESLint 9 and 10. Entry points are
+  the same names under `eslint-config-etherpad/flat/`, e.g.
+  `eslint-config-etherpad/flat/plugin`.
+
+The flat entry points are generated from the eslintrc ones at load time with
+[`FlatCompat`](https://eslint.org/docs/latest/use/configure/migration-guide), so
+there is exactly one copy of the rules and the two formats cannot drift apart.
+
 ## Available Configs
 
 * **`etherpad`**: Base config containing settings that are common to all files.
@@ -22,7 +36,82 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
   Assumes the plugin follows the [typical file
   layout](https://etherpad.org/doc/latest/#index_folder_structure).
 
-## Usage in an Etherpad Plugin
+Each of the names above also exists as a flat config under `flat/`:
+`eslint-config-etherpad/flat`, `eslint-config-etherpad/flat/node`,
+`eslint-config-etherpad/flat/browser`, `eslint-config-etherpad/flat/tests`,
+`eslint-config-etherpad/flat/tests/backend`,
+`eslint-config-etherpad/flat/tests/cypress`,
+`eslint-config-etherpad/flat/tests/frontend` and
+`eslint-config-etherpad/flat/plugin`. Each one exports a flat config array.
+There is a parallel set under `flat/ts/` (`eslint-config-etherpad/flat/ts/plugin`
+and so on) that also lints TypeScript files; see step 4 below.
+
+## Usage in an Etherpad Plugin (ESLint 9 or 10, flat config)
+
+1.  Install the shareable config and its dependencies:
+
+    ```shell
+    npm install --save-dev eslint eslint-config-etherpad typescript
+    ```
+
+    `typescript` must satisfy `>=4.8.4 <6.1.0`; that is the range
+    [`typescript-eslint` supports](https://typescript-eslint.io/users/dependency-versions/).
+    TypeScript 7 is the native port and does not expose the compiler API that
+    `typescript-eslint` needs, so it will not work.
+
+2.  Create an `eslint.config.js` in your project's root directory:
+
+    ```javascript
+    'use strict';
+
+    module.exports = require('eslint-config-etherpad/flat/plugin');
+    ```
+
+    or, if your package is ESM (`"type": "module"`), an `eslint.config.mjs`:
+
+    ```javascript
+    import etherpad from 'eslint-config-etherpad/flat/plugin';
+
+    export default etherpad;
+    ```
+
+    No `@rushstack/eslint-patch` workaround is needed: flat config resolves
+    plugins relative to the config that declares them.
+
+3.  To add your own rules, spread the array:
+
+    ```javascript
+    module.exports = [
+      ...require('eslint-config-etherpad/flat/plugin'),
+      {
+        files: ['static/js/shared/**/*'],
+        rules: {'no-console': 'error'},
+      },
+    ];
+    ```
+
+4.  Like eslintrc, the flat configs only look at `.js`, `.cjs`, `.mjs` and
+    `.jsx` files. To also lint TypeScript (the eslintrc equivalent of
+    `eslint --ext .ts .`), use the matching entry point under `flat/ts/`:
+
+    ```javascript
+    module.exports = require('eslint-config-etherpad/flat/ts/plugin');
+    ```
+
+    The TypeScript rules include type-aware ones, so you must also tell the
+    parser where your `tsconfig.json` is:
+
+    ```javascript
+    module.exports = [
+      ...require('eslint-config-etherpad/flat/ts/plugin'),
+      {
+        files: ['**/*.ts', '**/*.cts', '**/*.mts', '**/*.tsx'],
+        languageOptions: {parserOptions: {projectService: true}},
+      },
+    ];
+    ```
+
+## Usage in an Etherpad Plugin (ESLint 8, eslintrc)
 
 1.  Install the shareable config and its dependencies:
 
@@ -101,7 +190,7 @@ Etherpad plugins so that your code stays consistent with the Etherpad codebase.
    npx eslint --fix .
    ```
 
-## Overrides
+## Overrides (eslintrc)
 
 If you need to tune the configs, you can specify
 [overrides](https://eslint.org/docs/user-guide/configuring#configuration-based-on-glob-patterns)

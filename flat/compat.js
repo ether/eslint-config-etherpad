@@ -40,23 +40,29 @@ const compat = new FlatCompat({
 let mochaFlat;
 
 /**
- * Loads eslint-plugin-mocha v11. Loaded lazily so that configs that don't use the mocha plugin
- * (everything outside `tests.js`) work on Node.js versions that can't `require()` an ES module.
+ * Loads eslint-plugin-mocha v11, or returns null if this Node.js can't `require()` an ES module.
  *
- * @returns {Object} The eslint-plugin-mocha v11 plugin object.
+ * Loaded lazily so that configs that don't use the mocha plugin (everything outside `tests.js`)
+ * don't pay for it at all.
+ *
+ * Returning null is safe rather than a silent downgrade. `require()`ing an ES module needs Node.js
+ * >=20.19.0, >=22.12.0 or >=24, and ESLint 10 -- the only ESLint that v10 of the plugin is broken
+ * on -- declares `engines.node` of `^20.19.0 || ^22.13.0 || >=24`. So any runtime that can't load
+ * v11 also can't be running ESLint 10, which means the v10 plugin that eslintrc already uses works
+ * there. The older Node.js versions this package supports therefore fall back to v10 under ESLint
+ * 9 instead of failing to load the config at all.
+ *
+ * @returns {?Object} The eslint-plugin-mocha v11 plugin object, or null.
  */
 const getMochaFlat = () => {
-  if (mochaFlat) return mochaFlat;
+  if (mochaFlat !== undefined) return mochaFlat;
   let mod;
   try {
     mod = require('eslint-plugin-mocha-flat');
   } catch (err) {
-    // eslint-plugin-mocha v11 is ESM-only, and `require()`ing an ES module needs Node.js
-    // >=20.19.0, >=22.12.0 or >=24. Say so instead of letting ERR_REQUIRE_ESM escape.
-    throw new Error(
-        "eslint-config-etherpad's flat test configs need a Node.js version that can require() " +
-        `an ES module (>=20.19.0, >=22.12.0 or >=24); this is ${process.version}. ` +
-        `Original error: ${err.message}`);
+    if (err.code !== 'ERR_REQUIRE_ESM' && err.code !== 'ERR_REQUIRE_ASYNC_MODULE') throw err;
+    mochaFlat = null;
+    return mochaFlat;
   }
   mochaFlat = mod.default || mod;
   return mochaFlat;
@@ -96,9 +102,12 @@ const tsExtensions = ['.ts', '.cts', '.mts', '.tsx'];
  * @returns {Object} The same config, with the mocha plugin and rule names updated.
  */
 const useFlatCompatibleMocha = (config) => {
+  const mocha = getMochaFlat();
+  // No v11 available: keep the v10 plugin and its rule names (see `getMochaFlat()`).
+  if (mocha == null) return config;
   const out = {...config};
   if (out.plugins && out.plugins.mocha) {
-    out.plugins = {...out.plugins, mocha: getMochaFlat()};
+    out.plugins = {...out.plugins, mocha};
   }
   if (!out.rules) return out;
   const rules = {};

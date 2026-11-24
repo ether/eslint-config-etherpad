@@ -12,14 +12,19 @@ on:
 
 jobs:
   test:
+    name: test (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24', '26']
     steps:
       -
         uses: actions/checkout@v7
       -
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: ${{ matrix.node }}
       - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
@@ -68,7 +73,9 @@ jobs:
       -
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          # Node 26 is the Active LTS line; its bundled npm 11.x satisfies
+          # trusted publishing (npm >= 11.5.1).
+          node-version: 26
           registry-url: https://registry.npmjs.org/
       - uses: pnpm/action-setup@v6
         name: Install pnpm

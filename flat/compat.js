@@ -9,7 +9,7 @@
 // eslintrc configs at load time with `FlatCompat`. One source of truth, two formats.
 
 const path = require('path');
-const {FlatCompat} = require('@eslint/eslintrc');
+const {FlatCompat, Legacy: {environments}} = require('@eslint/eslintrc');
 const js = require('@eslint/js');
 
 const root = path.resolve(__dirname, '..');
@@ -119,6 +119,71 @@ const useFlatCompatibleMocha = (config) => {
   return out;
 };
 
+// The ecmaVersion that each built-in eslintrc environment implies (e.g. `es2017` -> 8).
+const envEcmaVersions = new Map();
+for (const [name, env] of environments) {
+  if (env.parserOptions && env.parserOptions.ecmaVersion != null) {
+    envEcmaVersions.set(name, env.parserOptions.ecmaVersion);
+  }
+}
+
+/**
+ * Drops the ecmaVersion that FlatCompat copies from an `env` into its own config object.
+ *
+ * eslintrc only uses an environment's ecmaVersion when no config sets `parserOptions.ecmaVersion`
+ * explicitly; an explicit value always wins, wherever it is in the extends chain. FlatCompat
+ * instead emits each environment as a separate config object, and in flat config the last object
+ * wins. `index.js` sets `env: {es2017: true}` and every entry point extends it again after
+ * `plugin:import/recommended` (2018) and `node.js` (2020), so without this the flat configs would
+ * parse browser and test files as ES2017 instead of ES2018, and reject syntax such as object spread
+ * that eslintrc accepts. Every file these configs lint gets an explicit ecmaVersion (at least
+ * `plugin:import/recommended`'s), so the environment's value never applied under eslintrc.
+ *
+ * Environment objects are recognised by shape: they carry nothing but `languageOptions` (and the
+ * `files` matcher of the override they came from), and their ecmaVersion is one an environment
+ * implies.
+ *
+ * @param {Object} config A flat config object.
+ * @returns {Object} The config, without an environment-derived ecmaVersion.
+ */
+const dropEnvEcmaVersion = (config) => {
+  const lo = config.languageOptions;
+  if (lo == null || lo.ecmaVersion == null || lo.globals == null) return config;
+  if (Object.keys(config).some((k) => k !== 'languageOptions' && k !== 'files')) return config;
+  if (Object.keys(lo).some((k) => !['ecmaVersion', 'globals', 'parserOptions'].includes(k))) {
+    return config;
+  }
+  if (![...envEcmaVersions.values()].includes(lo.ecmaVersion)) return config;
+  const languageOptions = {...lo};
+  delete languageOptions.ecmaVersion;
+  return {...config, languageOptions};
+};
+
+/**
+ * Restores the ESLint 8 default of `no-unused-vars`' `caughtErrors` option.
+ *
+ * ESLint 9 changed the default from `'none'` to `'all'`. The eslintrc entry points are linted with
+ * ESLint 8, so to keep the two formats reporting the same problems the flat ones say `'none'`
+ * explicitly unless the config already chose a value.
+ *
+ * Only the core rule is touched. `@typescript-eslint/no-unused-vars` already defaulted to `'all'`
+ * under ESLint 8 (typescript-eslint v8), so it keeps doing that in both formats.
+ *
+ * @param {Object} config A flat config object.
+ * @returns {Object} The config, with `caughtErrors` set on `no-unused-vars` where it is enabled.
+ */
+const keepCaughtErrorsDefault = (config) => {
+  const value = config.rules && config.rules['no-unused-vars'];
+  if (value == null) return config;
+  const [severity, options = {}] = Array.isArray(value) ? value : [value];
+  if (severity === 'off' || severity === 0 || typeof options !== 'object') return config;
+  if ('caughtErrors' in options) return config;
+  return {
+    ...config,
+    rules: {...config.rules, 'no-unused-vars': [severity, {...options, caughtErrors: 'none'}]},
+  };
+};
+
 /**
  * Translates one of this package's eslintrc config files into a flat config array.
  *
@@ -132,6 +197,8 @@ module.exports = (relPath, {typescript = false} = {}) => {
   const isLintable = (filePath) => lintable.has(path.extname(filePath));
   return compat.extends(path.join(root, relPath))
       .map(useFlatCompatibleMocha)
+      .map(dropEnvEcmaVersion)
+      .map(keepCaughtErrorsDefault)
       .map((config) => (Array.isArray(config.files) ? {
         ...config,
         files: config.files.map((f) => (typeof f === 'function'

@@ -70,10 +70,13 @@ and so on) that also lints TypeScript files; see step 4 below.
     or, if your package is ESM (`"type": "module"`), an `eslint.config.mjs`:
 
     ```javascript
-    import etherpad from 'eslint-config-etherpad/flat/plugin';
+    import etherpad from 'eslint-config-etherpad/flat/plugin.js';
 
     export default etherpad;
     ```
+
+    The `.js` extension is required here: this package has no `exports` map, so
+    Node.js's ESM resolver will not add it for you.
 
     No `@rushstack/eslint-patch` workaround is needed: flat config resolves
     plugins relative to the config that declares them.
